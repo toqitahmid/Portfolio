@@ -1,27 +1,105 @@
 @import "tailwindcss";
-@import "@heroui/styles"; 
+@plugin "tailwindcss-animate";
+@import "@heroui/styles";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Override any color variable */
+  --accent: oklch(0.7 0.25 260);
+  --success: oklch(0.65 0.15 155);
+
+  /* Star & meteor colors — light mode (default) */
+  --star-bg: rgba(212, 160, 23, 0.85);
+  --star-glow: rgba(212, 160, 23, 0.3);
+  --meteor-head: rgba(212, 160, 23, 0.98);
+  --meteor-mid: rgba(212, 160, 23, 0.55);
+  --meteor-glow: rgba(212, 160, 23, 0.45);
+  --meteor-shadow: rgba(212, 160, 23, 0.25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  /* Star & meteor colors — dark mode */
+  --star-bg: rgba(255, 255, 255, 1);
+  --star-glow: rgba(255, 255, 255, 0.4);
+  --meteor-head: rgba(255, 255, 255, 0.98);
+  --meteor-mid: rgba(255, 255, 255, 0.6);
+  --meteor-glow: rgba(255, 255, 255, 0.6);
+  --meteor-shadow: rgba(255, 255, 255, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Ensure anchored/scroll-to sections are not hidden behind the header (header height = 4rem) */
+html {
+  scroll-padding-top: 4rem;
+  scroll-behavior: smooth;
+}
+
+/* Smooth theme transitions: only enable transitions while the theme is actively changing.
+   We add/remove the `theme-transition` class on the html element during a theme toggle. */
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 250ms ease,
+    color 250ms ease,
+    border-color 250ms ease,
+    fill 250ms ease,
+    stroke 250ms ease,
+    box-shadow 250ms ease;
+}
+
+@theme {
+  --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition: none !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility star {
+  @apply absolute rounded-full;
+  background-color: var(--star-bg);
+  box-shadow: 0 0 10px 2px var(--star-glow);
+}
+
+/* Falling/meteor animation */
+@keyframes meteor-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-25deg);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(200px, 120vh, 0) rotate(-25deg);
+    opacity: 0;
+  }
+}
+
+.meteor {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--meteor-head),
+    var(--meteor-mid),
+    transparent
+  );
+  border-radius: 9999px;
+  box-shadow: 0 0 8px 2px var(--meteor-glow), 0 0 20px 6px var(--meteor-shadow);
+  transform-origin: center;
+}
+
+.animate-meteor {
+  animation-name: meteor-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
 }
