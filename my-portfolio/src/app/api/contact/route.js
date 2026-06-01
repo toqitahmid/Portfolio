@@ -11,7 +11,7 @@ export async function POST (request){
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESENDAPIKEY;
   if(!apiKey){
     return NextResponse.json(
       {error: "Missing API Key"},
@@ -24,7 +24,7 @@ export async function POST (request){
   try {
     await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: process.env.MY_GMAIL,
+      to: process.env.MYGMAIL,
       subject: `New message from ${name}`,
       html: `
         <h2>New Contact Form Message</h2>
