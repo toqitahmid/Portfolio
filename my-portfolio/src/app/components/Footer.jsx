@@ -37,10 +37,10 @@ const Footer = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
-      className="border-t border-border/20 px-6 py-5 backdrop-blur-xl"
+      className="border-t border-border/20 px-3 sm:px-6 py-4 sm:py-5 backdrop-blur-xl overflow-x-hidden"
     >
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-between gap-3 sm:gap-4">
+        <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-start">
           <span className="font-medium text-foreground">Toqi Tahmid</span>
         </p>
 
@@ -52,7 +52,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="flex h-9 w-9 items-center justify-center rounded-md border border-border/20 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              className="flex h-8 sm:h-9 w-8 sm:w-9 items-center justify-center rounded-md border border-border/20 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground text-sm sm:text-base"
             >
               {icon}
             </a>
@@ -60,7 +60,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <p className="mt-4 border-t border-border/20 pt-3 text-center text-xs text-muted-foreground">
+      <p className="mt-3 sm:mt-4 border-t border-border/20 pt-2 sm:pt-3 text-center text-[10px] sm:text-xs text-muted-foreground">
         © {new Date().getFullYear()} Toqi Tahmid. All rights reserved.
       </p>
     </motion.footer>

@@ -30,6 +30,12 @@
 html {
   scroll-padding-top: 4rem;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Smooth theme transitions: only enable transitions while the theme is actively changing.
@@ -93,7 +99,9 @@ html.theme-transition *::after {
     transparent
   );
   border-radius: 9999px;
-  box-shadow: 0 0 8px 2px var(--meteor-glow), 0 0 20px 6px var(--meteor-shadow);
+  box-shadow:
+    0 0 8px 2px var(--meteor-glow),
+    0 0 20px 6px var(--meteor-shadow);
   transform-origin: center;
 }
 

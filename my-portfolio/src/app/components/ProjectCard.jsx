@@ -61,20 +61,20 @@ export default function ProjectCard({ project, index }) {
       // `overflow-hidden`      — clips the image to the card's rounded corners
       // `group`                — allows child elements to react to card hover
       //                          via `group-hover:` Tailwind classes
-      className="rounded-2xl border border-foreground/8 bg-default/40 backdrop-blur-sm overflow-hidden group"
+      className="rounded-xl sm:rounded-2xl border border-foreground/8 bg-default/40 backdrop-blur-sm overflow-hidden group"
     >
       {/* ── Project image ── */}
-      {/* `relative h-52` — sets a fixed height so Next.js Image can fill it */}
-      <div className="relative lg:h-70 md:h-55 h-52 w-full bg-foreground/5">
+      {/* `relative h-40 sm:h-52` — responsive fixed height for Image */}
+      <div className="relative h-40 sm:h-52 md:h-55 lg:h-70 w-full bg-foreground/5">
         <Image
           // Replace `project.imageUrl` with whatever field name your JSON uses.
           // If you have no image yet, remove the Image and keep the placeholder div.
           src={project.imgUrl}
           alt={project.title}
-          sizes='...'
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
           fill // fills the parent div completely
           className={[
-            "", // covers the area without distortion
+            "object-cover", // covers the area without distortion
             // `group-hover:scale-105` — image zooms in slightly when card is hovered
             // `transition-transform duration-500` — smooth 500ms zoom
             "group-hover:scale-105 transition-transform duration-500",
@@ -83,50 +83,50 @@ export default function ProjectCard({ project, index }) {
       </div>
 
       {/* ── Card body ── */}
-      <div className="p-6">
+      <div className="p-3 sm:p-4 md:p-6">
         {/* Project title */}
-        <h3 className="text-lg font-bold mb-2">{project.title}</h3>
+        <h3 className="text-base sm:text-lg font-bold mb-2">{project.title}</h3>
 
         {/* Description — two lines max on desktop to keep cards uniform height */}
-        <p className="text-sm text-foreground/55 leading-relaxed mb-4 line-clamp-2">
+        <p className="text-xs sm:text-sm text-foreground/55 leading-relaxed mb-3 sm:mb-4 line-clamp-2">
           {project.description}
         </p>
 
         {/* ── Tech stack chips ── */}
         {/* `flex-wrap` — chips wrap to a new line if there are too many */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
           {project.technologies.map((tech) => (
             <span
               key={tech}
               // Pill badge — amber toned to match the site's accent colour
-              className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
+              className="text-[9px] sm:text-[11px] font-mono px-2 sm:px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 whitespace-nowrap"
             >
               {tech}
             </span>
-          ))}
+          ))}{" "}
         </div>
 
         {/* ── Challenge line ── */}
         {/* Shows the main challenge/learning from this project */}
-        <p className="text-[12px] text-foreground/40 mb-5 leading-relaxed">
+        <p className="text-[10px] sm:text-[12px] text-foreground/40 mb-3 sm:mb-5 leading-relaxed">
           <span className="font-semibold text-foreground/60">Challenge: </span>
           {project.challenge}
         </p>
 
         {/* ── Action buttons ── */}
-        <div className="flex gap-3">
+        <div className="flex gap-2 sm:gap-3">
           {/* GitHub link — ghost style (border only, no fill) */}
           <Link
             href={project.githubUrl}
             target="_blank" // opens in new tab
             rel="noopener noreferrer" // security best practice for target="_blank"
             className={[
-              "text-xs font-medium px-4 py-2 rounded-lg",
+              "text-[10px] sm:text-xs font-medium px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg",
               "border border-foreground/15",
               "text-foreground/60",
               // Hover: border and text brighten slightly
               "hover:border-foreground/40 hover:text-foreground",
-              "transition-colors duration-200",
+              "transition-colors duration-200 whitespace-nowrap",
             ].join(" ")}
           >
             GitHub
@@ -138,11 +138,11 @@ export default function ProjectCard({ project, index }) {
             target="_blank"
             rel="noopener noreferrer"
             className={[
-              "text-xs font-medium px-4 py-2 rounded-lg",
+              "text-[10px] sm:text-xs font-medium px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg",
               "bg-amber-500 text-white",
               // Hover: darkens the amber slightly
               "hover:bg-amber-600",
-              "transition-colors duration-200",
+              "transition-colors duration-200 whitespace-nowrap",
             ].join(" ")}
           >
             Live Preview

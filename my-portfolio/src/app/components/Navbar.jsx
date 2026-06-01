@@ -14,7 +14,7 @@ export function Navbar() {
     { label: "Home", address: "/ui/home" },
     { label: "Skills", address: "/ui/skills" },
     { label: "Projects", address: "/ui/projects" },
-     { label: "Contact", address: "/ui/contact" },
+    { label: "Contact", address: "/ui/contact" },
   ];
   const NavLink = ({ item, mobile = false, index = 0 }) => {
     const isActive = pathname === item.address;
@@ -41,9 +41,9 @@ export function Navbar() {
     );
   };
   return (
-    <div className="sticky top-0 w-full z-50 border-b border-separator backdrop-blur-sm rounded-b-2xl">
+    <div className="sticky top-0 w-full z-50 border-b border-separator backdrop-blur-sm rounded-b-2xl overflow-x-hidden">
       <NavStar></NavStar>
-      <header className="flex h-16 items-center justify-between px-6 lg:w-9/12 md:w-11/12 w-full mx-auto">
+      <header className="flex h-16 items-center justify-between px-3 sm:px-6 lg:w-9/12 md:w-11/12 w-full mx-auto">
         <div className="flex items-center justify-between gap-4">
           <Drawer>
             <Button className="md:hidden" variant="secondary">

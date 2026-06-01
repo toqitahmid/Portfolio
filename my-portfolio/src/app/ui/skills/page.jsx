@@ -122,9 +122,9 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen py-20 flex items-center justify-center"
+      className="min-h-screen py-10 sm:py-20 flex items-center justify-center overflow-x-hidden"
     >
-      <div className="w-full max-w-6xl px-6">
+      <div className="w-full max-w-6xl px-3 sm:px-6">
         {/* Heading */}
         <motion.div
           className="text-center mb-16"
@@ -133,10 +133,10 @@ export default function Skills() {
           viewport={{ once: true, amount: 0.3 }}
           variants={headingVariants}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-6">
             MERN Stack Expertise
           </h2>
-          <p className="max-w-4xl mx-auto text-muted-foreground sm:text-center text-justify leading-8 text-base md:text-lg mb-20">
+          <p className="max-w-4xl mx-auto text-muted-foreground text-center leading-6 sm:leading-8 text-xs sm:text-base md:text-lg mb-10 sm:mb-20 px-2">
             Full-stack developer with 6+ months of hands-on experience building
             scalable MERN applications using React, Next.js, Node.js,
             Express.js, MongoDB, and TypeScript. Passionate about backend
@@ -151,26 +151,28 @@ export default function Skills() {
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-amber-600/70 -translate-x-1/2" />
 
           {/* Mobile side line */}
-          <div className="md:hidden absolute left-5 top-0 bottom-0 w-[2px] bg-amber-600/70" />
+          <div className="md:hidden absolute left-2 sm:left-5 top-0 bottom-0 w-[2px] bg-amber-600/70" />
 
-          <div className="space-y-14">
+          <div className="space-y-10 sm:space-y-14">
             {skills.map((s, i) => (
               <div
                 key={s.name}
                 className="relative flex md:grid md:grid-cols-2 md:gap-10"
               >
                 {/* Mobile layout */}
-                <div className="md:hidden flex w-full gap-5">
-                  <div className="relative flex flex-col items-center">
+                <div className="md:hidden flex w-full gap-3 sm:gap-5">
+                  <div className="relative flex flex-col items-center flex-shrink-0">
                     <motion.div
-                      className="w-5 h-5 rounded-full bg-amber-600 z-10 mt-6"
+                      className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-amber-600 z-10 mt-4 sm:mt-6"
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
                       variants={dotVariants}
                     />
                   </div>
-                  <SkillCard s={s} dir="right" />
+                  <div className="flex-1 min-w-0">
+                    <SkillCard s={s} dir="right" />
+                  </div>
                 </div>
 
                 {/* Desktop left column */}
@@ -206,7 +208,7 @@ export default function Skills() {
 function SkillCard({ s, dir }) {
   return (
     <motion.div
-      className="w-full max-w-md bg-default/60 dark:bg-default/20 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl p-6 hover:scale-[1.02]"
+      className="w-full max-w-md bg-default/60 dark:bg-default/20 backdrop-blur-md border border-white/10 shadow-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:scale-[1.02]"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -214,18 +216,18 @@ function SkillCard({ s, dir }) {
       whileHover={{ scale: 1.03 }}
     >
       {/* Top: emoji + name + desc + badges */}
-      <div className="flex items-start gap-4">
-        <div className="text-3xl">{s.emoji}</div>
-        <div className="flex-1">
-          <h3 className="text-xl font-bold">{s.name}</h3>
-          <p className="text-sm text-muted-foreground mt-2 leading-6">
+      <div className="flex items-start gap-3 sm:gap-4">
+        <div className="text-2xl sm:text-3xl flex-shrink-0">{s.emoji}</div>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg sm:text-xl font-bold truncate">{s.name}</h3>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-2 leading-5 sm:leading-6">
             {s.desc}
           </p>
-          <div className="flex flex-wrap gap-2 mt-4">
-            <span className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
+          <div className="flex flex-wrap gap-1 sm:gap-2 mt-3 sm:mt-4">
+            <span className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 rounded-full bg-primary/10 text-primary font-medium whitespace-nowrap">
               {s.status}
             </span>
-            <span className="text-xs px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 font-medium">
+            <span className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 font-medium whitespace-nowrap">
               {s.experience}
             </span>
           </div>
@@ -233,8 +235,8 @@ function SkillCard({ s, dir }) {
       </div>
 
       {/* Progress bar */}
-      <div className="mt-6">
-        <div className="flex justify-between text-sm mb-2">
+      <div className="mt-4 sm:mt-6">
+        <div className="flex justify-between text-xs sm:text-sm mb-2">
           <span>Skill Proficiency</span>
           <span>{s.level}%</span>
         </div>
