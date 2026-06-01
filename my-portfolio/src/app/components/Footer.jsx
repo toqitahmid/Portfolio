@@ -5,7 +5,7 @@ import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
   const socials = [
     {
-      socialLink: "https://github.com/yourusername",
+      socialLink: "https://github.com/toqitahmid",
       label: "GitHub",
       icon: <FaGithub></FaGithub>,
     },
@@ -15,17 +15,17 @@ const Footer = () => {
       icon: <FaLinkedin></FaLinkedin>,
     },
     {
-      socialLink: "https://twitter.com/yourusername",
+      socialLink: "https://x.com/toqitah_mid",
       label: "Twitter / X",
       icon: <FaXTwitter></FaXTwitter>,
     },
     {
-      socialLink: "https://facebook.com/yourusername",
+      socialLink: "https://www.facebook.com/mad.tahmid.6T9/",
       label: "Facebook",
       icon: <FaFacebook></FaFacebook>,
     },
     {
-      socialLink: "https://instagram.com/yourusername",
+      socialLink: "https://www.instagram.com/mad_toqi/",
       label: "Instagram",
       icon: <FaInstagram></FaInstagram>,
     },
