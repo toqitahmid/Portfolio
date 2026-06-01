@@ -1,9 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import devToqi from "../../../assets/pro2.png";
-import { Badge, Button, Chip } from "@heroui/react";
-import { Circle, CircleCheckFill } from "@gravity-ui/icons";
+import devToqi from "../../../assets/toqi.png";
+import { Button, Chip } from "@heroui/react";
+import { CircleCheckFill, ArrowDownToSquare } from "@gravity-ui/icons";
+import Link from "next/link";
 const About = () => {
   const skills = [
     { name: "React" },
@@ -52,8 +53,18 @@ const About = () => {
               </p>
             </div>
             <div className="flex gap-3 mt-4">
+              <Link
+              href= '/ui/projects'
+              >
               <Button variant="secondary">View Projects</Button>
-              <Button variant="outline">Download CV</Button>
+              </Link>
+              <Link
+              href="/resume.pdf"
+              >
+              <Button variant="outline">
+              <ArrowDownToSquare></ArrowDownToSquare>
+              Download Resume</Button>
+              </Link>
             </div>
           </motion.div>
 

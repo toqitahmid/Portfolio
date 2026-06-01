@@ -14,8 +14,7 @@ export function Navbar() {
     { label: "Home", address: "/ui/home" },
     { label: "Skills", address: "/ui/skills" },
     { label: "Projects", address: "/ui/projects" },
-    { label: "Experience", address: "/ui/experience" },
-    { label: "Contact", address: "/ui/contact" },
+     { label: "Contact", address: "/ui/contact" },
   ];
   const NavLink = ({ item, mobile = false, index = 0 }) => {
     const isActive = pathname === item.address;
@@ -83,7 +82,7 @@ export function Navbar() {
             </Avatar>
           </Link>
         </div>
-        <ul className="hidden items-center gap-5 text-xl md:flex">
+        <ul className="hidden items-center gap-5 text-2xl md:flex text-yellow-400">
           {navItems.map((item, idx) => (
             <NavLink key={item.label} item={item} index={idx} />
           ))}
