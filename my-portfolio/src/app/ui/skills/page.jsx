@@ -148,10 +148,10 @@ export default function Skills() {
         {/* Timeline */}
         <div className="relative pt-10">
           {/* Desktop center line */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-amber-600/70 -translate-x-1/2" />
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-amber-600/70 -translate-x-1/2" />
 
           {/* Mobile side line */}
-          <div className="md:hidden absolute left-2 sm:left-5 top-0 bottom-0 w-[2px] bg-amber-600/70" />
+          <div className="md:hidden absolute left-2 sm:left-5 top-0 bottom-0 w-0.5 bg-amber-600/70" />
 
           <div className="space-y-10 sm:space-y-14">
             {skills.map((s, i) => (
@@ -161,7 +161,7 @@ export default function Skills() {
               >
                 {/* Mobile layout */}
                 <div className="md:hidden flex w-full gap-3 sm:gap-5">
-                  <div className="relative flex flex-col items-center flex-shrink-0">
+                  <div className="relative flex flex-col items-center shrink-0">
                     <motion.div
                       className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-amber-600 z-10 mt-4 sm:mt-6"
                       initial="hidden"
@@ -217,7 +217,7 @@ function SkillCard({ s, dir }) {
     >
       {/* Top: emoji + name + desc + badges */}
       <div className="flex items-start gap-3 sm:gap-4">
-        <div className="text-2xl sm:text-3xl flex-shrink-0">{s.emoji}</div>
+        <div className="text-2xl sm:text-3xl shrink-0">{s.emoji}</div>
         <div className="flex-1 min-w-0">
           <h3 className="text-lg sm:text-xl font-bold truncate">{s.name}</h3>
           <p className="text-xs sm:text-sm text-muted-foreground mt-2 leading-5 sm:leading-6">
@@ -242,7 +242,7 @@ function SkillCard({ s, dir }) {
         </div>
         <div className="h-3 w-full rounded-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
           <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500"
+            className="h-full rounded-full bg-linear-to-r from-amber-500 to-orange-500"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}

@@ -14,6 +14,7 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
+
 const Contact = () => {
   const [status, setStatus] = useState(null);
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ const Contact = () => {
 
       if (res.ok) {
         setStatus("success");
-        setFormData({ name: "", email: "", message: "" }); // form clear
+        setFormData({ name: "", email: "", message: "" });
       } else {
         setStatus("error");
       }
@@ -47,16 +48,18 @@ const Contact = () => {
       setStatus("error");
     }
   };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
-      className="flex justify-center lg:justify-evenly items-center min-h-screen sm:flex-row flex-col backdrop-blur-sm backdrop-grayscale-30 border gap-4 sm:gap-8 px-3 sm:px-6 py-6 overflow-x-hidden"
+      className="flex flex-col sm:flex-row items-center lg:w-8/12 md:w-full mx-auto min-h-screen justify-around backdrop-blur-sm border gap-5 px-6 sm:px-16 py-10"
     >
-      <div className="space-y-3 flex-shrink-0">
-        <Avatar className="sm:flex justify-self-center rounded-full size-24 sm:size-30">
+      {/* ── Left side ── */}
+      <div className="flex flex-col items-center sm:items-start space-y-4 sm:flex-1">
+        <Avatar className="rounded-full size-24 sm:size-30">
           <Avatar.Image
             alt="Toqi Tahmid"
             src="https://i.ibb.co.com/ycV78Pzt/professional.png"
@@ -68,29 +71,27 @@ const Contact = () => {
         </h1>
         <Button
           variant="secondary"
-          className="text-yellow-400 text-xs sm:text-sm w-full sm:w-auto"
+          className="text-yellow-400 text-xs sm:text-sm"
         >
-          <Brain className="w-4 h-4"></Brain>
+          <Brain className="w-4 h-4" />
           <span className="hidden sm:inline">
             Contact us now to turn your ideas into reality.
           </span>
-          <span className="sm:hidden">Let's talk!</span>
+          <span className="sm:hidden">Lets talk!</span>
         </Button>
       </div>
-      <div className="w-full sm:w-auto lg:w-[25vw] md:w-[40vw] max-w-sm mx-auto">
-        <Form
-          onSubmit={handleSubmit}
-          className="border p-3 sm:p-4 rounded-2xl sm:rounded-3xl"
-        >
+
+      {/* ── Right side ── */}
+      <div className="w-full sm:flex-1 sm:max-w-md">
+        <Form onSubmit={handleSubmit} className="border p-4 rounded-3xl">
           <Fieldset>
             <Fieldset.Group>
               <TextField
                 isRequired
                 name="name"
                 validate={(value) => {
-                  if (value.length < 3) {
+                  if (value.length < 3)
                     return "Name must be at least 3 characters";
-                  }
                   return null;
                 }}
               >
@@ -103,6 +104,7 @@ const Contact = () => {
                 />
                 <FieldError />
               </TextField>
+
               <TextField isRequired name="email" type="email">
                 <Label>Email</Label>
                 <Input
@@ -113,13 +115,13 @@ const Contact = () => {
                 />
                 <FieldError />
               </TextField>
+
               <TextField
                 isRequired
                 name="message"
                 validate={(value) => {
-                  if (value.length < 10) {
-                    return "Bio must be at least 10 characters";
-                  }
+                  if (value.length < 10)
+                    return "Message must be at least 10 characters";
                   return null;
                 }}
               >
@@ -133,7 +135,7 @@ const Contact = () => {
                 <FieldError />
               </TextField>
             </Fieldset.Group>
-            {/* ✅ Status Messages */}
+
             {status === "loading" && (
               <p className="text-yellow-400 text-sm">Sending...</p>
             )}
@@ -147,12 +149,13 @@ const Contact = () => {
                 ❌ Something went wrong. Try again.
               </p>
             )}
+
             <Fieldset.Actions>
               <Button
                 variant="secondary"
                 type="submit"
                 className="text-yellow-400"
-                disabled={status === "loading"} // ✅ loading এ disable
+                disabled={status === "loading"}
               >
                 <FloppyDisk />
                 {status === "loading" ? "Sending..." : "Send Message"}

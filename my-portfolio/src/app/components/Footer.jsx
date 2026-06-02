@@ -10,7 +10,7 @@ const Footer = () => {
       icon: <FaGithub></FaGithub>,
     },
     {
-      socialLink: "https://linkedin.com/in/yourusername",
+      socialLink: "https://www.linkedin.com/in/toqi6t9/",
       label: "LinkedIn",
       icon: <FaLinkedin></FaLinkedin>,
     },
