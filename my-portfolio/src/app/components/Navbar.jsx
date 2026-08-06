@@ -1,104 +1,170 @@
 "use client";
-// import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { Button, Drawer, Avatar } from "@heroui/react";
 import ThemeToggle from "./ThemeToggle";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import NavStar from "./NavStar";
-import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 
 export function Navbar() {
-  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState("home");
+
   const navItems = [
-    { label: "Home", address: "/ui/home" },
-    { label: "Skills", address: "/ui/skills" },
-    { label: "Projects", address: "/ui/projects" },
-    { label: "Contact", address: "/ui/contact" },
+    { label: "Home", id: "home" },
+    { label: "Projects", id: "projects" },
+    { label: "Contact", id: "contact" },
   ];
+
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => document.getElementById(item.id))
+      .filter(Boolean);
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+
+    if (!section) return;
+
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   const NavLink = ({ item, mobile = false, index = 0 }) => {
-    const isActive = pathname === item.address;
+    const isActive = activeSection === item.id;
+
     return (
       <motion.div
         initial={{ opacity: 0, y: -6 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.32, delay: index * 0.05 }}
+        transition={{ duration: 0.3, delay: index * 0.05 }}
         whileHover={{ scale: 1.03 }}
+        className="relative"
       >
-        <Link
-          href={item.address}
-          className={`flex items-center text-center whitespace-nowrap gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${
-            mobile ? "w-full" : "whitespace-nowrap"
+        <button
+          onClick={() => scrollToSection(item.id)}
+          className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors cursor-pointer ${
+            mobile ? "w-full justify-start" : ""
           } ${
             isActive
-              ? "border-b-2 border-b-yellow-300 text-primary-foreground font-semibold  shadow-sm f "
+              ? "font-semibold text-primary"
               : "text-foreground hover:bg-default"
           }`}
         >
           {item.label}
-        </Link>
+        </button>
+
+        <AnimatePresence>
+          {isActive && (
+            <motion.div
+              layoutId={mobile ? "mobile-nav" : "desktop-nav"}
+              className="absolute left-0 bottom-0 h-[2px] w-full bg-yellow-400"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 30,
+              }}
+            />
+          )}
+        </AnimatePresence>
       </motion.div>
     );
   };
+
   return (
-    <div className="sticky top-0 w-full z-50 border-b border-separator backdrop-blur-sm rounded-b-2xl overflow-x-hidden">
-      <NavStar></NavStar>
-      <header className="flex h-16 items-center justify-between px-3 sm:px-6 lg:w-9/12 md:w-11/12 w-full mx-auto">
-        <div className="flex items-center justify-between gap-4">
+    <div className="sticky top-0 z-50 w-full border-b border-separator backdrop-blur-md rounded-b-2xl">
+      <NavStar />
+
+      <header className="mx-auto flex h-16 w-full items-center justify-between px-3 sm:px-6 md:w-11/12 lg:w-9/12">
+        <div className="flex items-center gap-4">
           <Drawer>
             <Button className="md:hidden" variant="secondary">
               <Menu />
             </Button>
+
             <Drawer.Backdrop>
               <Drawer.Content placement="left">
                 <Drawer.Dialog>
                   <Drawer.CloseTrigger />
+
                   <Drawer.Header>
                     <Drawer.Heading>Navigation</Drawer.Heading>
                   </Drawer.Header>
+
                   <Drawer.Body>
-                    <nav className="flex flex-col gap-5">
-                      {navItems.map((item, idx) => (
-                        <NavLink
-                          key={item.label}
-                          item={item}
-                          mobile
-                          index={idx}
-                        />
-                      ))}
-                    </nav>
+                    <LayoutGroup id="mobile-navigation">
+                      <nav className="flex flex-col gap-4">
+                        {navItems.map((item, index) => (
+                          <NavLink
+                            key={item.id}
+                            item={item}
+                            mobile
+                            index={index}
+                          />
+                        ))}
+                      </nav>
+                    </LayoutGroup>
                   </Drawer.Body>
                 </Drawer.Dialog>
               </Drawer.Content>
             </Drawer.Backdrop>
           </Drawer>
-          <Link href="/ui/home" className="hidden sm:flex">
-            <Avatar>
+
+          <Link href="/">
+            <Avatar className="hidden sm:flex">
               <Avatar.Image
                 alt="Toqi Tahmid"
                 src="https://i.ibb.co.com/ycV78Pzt/professional.png"
               />
-              <Avatar.Fallback></Avatar.Fallback>
             </Avatar>
           </Link>
         </div>
-        <ul className="hidden items-center gap-5 text-2xl md:flex text-yellow-400">
-          {navItems.map((item, idx) => (
-            <NavLink key={item.label} item={item} index={idx} />
-          ))}
-        </ul>
 
-        <div className="flex justify-center items-center gap-2">
-          <Link href="/ui/home" className="md:hidden">
+        <LayoutGroup id="desktop-navigation">
+          <nav className="hidden items-center gap-5 md:flex">
+            {navItems.map((item, index) => (
+              <NavLink key={item.id} item={item} index={index} />
+            ))}
+          </nav>
+        </LayoutGroup>
+
+        <div className="flex items-center gap-2">
+          <Link href="/" className="md:hidden">
             <Avatar>
               <Avatar.Image
                 alt="Toqi Tahmid"
                 src="https://i.ibb.co.com/ycV78Pzt/professional.png"
               />
-              <Avatar.Fallback></Avatar.Fallback>
             </Avatar>
           </Link>
-          <ThemeToggle></ThemeToggle>
+
+          <ThemeToggle />
         </div>
       </header>
     </div>

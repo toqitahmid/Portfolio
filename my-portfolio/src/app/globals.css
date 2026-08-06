@@ -38,6 +38,25 @@ body {
   width: 100%;
 }
 
+/* Hide vertical scrollbars on non-root scrollable elements while keeping page scroll */
+*:not(html):not(body):not(#__next) {
+  scrollbar-width: none; /* Firefox */
+}
+*:not(html):not(body):not(#__next)::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+/* Ensure root containers fill viewport and avoid unexpected inner scrollbars */
+html,
+body,
+#__next {
+  height: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
 /* Smooth theme transitions: only enable transitions while the theme is actively changing.
    We add/remove the `theme-transition` class on the html element during a theme toggle. */
 html.theme-transition *,

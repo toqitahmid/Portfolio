@@ -7,8 +7,8 @@ const StarBackground = () => {
 
   const generateStars = () => {
     const numberOfStars = Math.max(
-      30,
-      Math.floor((window.innerWidth * window.innerHeight) / 3999),
+      20,
+      Math.floor((window.innerWidth * window.innerHeight) / 12000),
     );
 
     const newStars = [];
@@ -25,7 +25,7 @@ const StarBackground = () => {
     setStars(newStars);
   };
   const generateMeteors = () => {
-    const numberOfMeteors = 4;
+    const numberOfMeteors = 3;
     const newMeteors = [];
 
     for (let i = 0; i < numberOfMeteors; i++) {
@@ -42,18 +42,52 @@ const StarBackground = () => {
     setMeteors(newMeteors);
   };
   useEffect(() => {
-    // generate on mount
-    startTransition(() => generateStars());
-    startTransition(() => generateMeteors());
+    let idleId = null;
+    let timeoutId = null;
+    let resizeTimer = null;
 
-    // regenerate on resize so stars fill the available area
-    const onResize = () => startTransition(() => generateStars());
+    const runDeferred = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(
+          () => {
+            generateStars();
+            generateMeteors();
+          },
+          { timeout: 500 },
+        );
+      } else {
+        timeoutId = setTimeout(() => {
+          generateStars();
+          generateMeteors();
+        }, 200);
+      }
+    };
+
+    // generate on mount but defer so initial paint isn't blocked
+    runDeferred();
+
+    // regenerate on resize (debounced)
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => generateStars(), 250);
+    };
+
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      if (idleId && window.cancelIdleCallback)
+        window.cancelIdleCallback(idleId);
+      if (timeoutId) clearTimeout(timeoutId);
+      clearTimeout(resizeTimer);
+    };
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div
+      className="fixed inset-0 overflow-hidden pointer-events-none"
+      style={{ zIndex: -20 }}
+    >
       {stars.map((star) => (
         <div
           key={star.id}

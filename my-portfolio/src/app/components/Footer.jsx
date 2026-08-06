@@ -33,11 +33,11 @@ const Footer = () => {
 
   return (
     <motion.footer
-      initial={{ opacity: 0, y: 16 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
-      className="border-t border-border/20 px-3 sm:px-6 py-4 sm:py-5 backdrop-blur-xl overflow-x-hidden"
+      className="relative border-t border-border/20 px-3 sm:px-6 py-4 sm:py-5 backdrop-blur-xl overflow-hidden box-border pt-10 w-full z-40"
     >
       <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-between gap-3 sm:gap-4">
         <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-start">

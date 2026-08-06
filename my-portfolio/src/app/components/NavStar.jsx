@@ -6,8 +6,8 @@ const NavStar = () => {
 
   const generateStars = () => {
     const numberOfStars = Math.max(
-      30,
-      Math.floor((window.innerWidth * window.innerHeight) / 19999),
+      12,
+      Math.floor((window.innerWidth * window.innerHeight) / 80000),
     );
 
     const newStars = [];
@@ -25,17 +25,42 @@ const NavStar = () => {
   };
 
   useEffect(() => {
-    // generate on mount
-    startTransition(() => generateStars());
+    let idleId = null;
+    let timeoutId = null;
+    let resizeTimer = null;
 
-    // regenerate on resize so stars fill the available area
-    const onResize = () => startTransition(() => generateStars());
+    const runDeferred = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(() => generateStars(), {
+          timeout: 500,
+        });
+      } else {
+        timeoutId = setTimeout(() => generateStars(), 200);
+      }
+    };
+
+    runDeferred();
+
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => generateStars(), 250);
+    };
+
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      if (idleId && window.cancelIdleCallback)
+        window.cancelIdleCallback(idleId);
+      if (timeoutId) clearTimeout(timeoutId);
+      clearTimeout(resizeTimer);
+    };
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+      style={{ zIndex: -10 }}
+    >
       {stars.map((star) => (
         <div
           key={star.id}

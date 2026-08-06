@@ -1,9 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
 import Providers from "@/providers/NextThemeProvider";
 import { Navbar } from "./components/Navbar";
-import StarBackground from "./components/StarBackground";
+import StarBackgroundClient from "./components/StarBackgroundClient";
 import Footer from "./components/Footer";
 
 const geistSans = Geist({
@@ -31,10 +30,8 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <Providers>
-          <Navbar></Navbar>
-          <StarBackground></StarBackground>
+          <StarBackgroundClient />
           {children}
-          <Footer></Footer>
         </Providers>
       </body>
     </html>
