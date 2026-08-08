@@ -1,5 +1,4 @@
 import About from "../about/page";
-import Skills from "../skills/page";
 import Contact from "../contact/page";
 import Projects from "../projects/page";
 import { Navbar } from "@/app/components/Navbar";

@@ -2,7 +2,39 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
+import { useState } from "react";
+import { authClient } from "../lib/auth-client";
+import { useRouter } from "next/navigation";
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    if (email !== "abusamsarafofficial@gmail.com") {
+      router.push("/");
+      return;
+    } else if (password !== "@TOQI-99@") {
+      router.push("/");
+      return;
+    }
+    const { data, error } = await authClient.signIn.email({
+      // name: 'Toqi Tahmid',
+      email: email,
+      password: password,
+      rememberMe: true,
+    });
+
+    if (data) {
+      router.push("/");
+    } else if (error) {
+      console.log(error);
+    }
+  };
   const socials = [
     {
       socialLink: "https://github.com/toqitahmid",
@@ -41,7 +73,62 @@ const Footer = () => {
     >
       <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-between gap-3 sm:gap-4">
         <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-start">
-          <span className="font-medium text-foreground">Toqi Tahmid</span>
+          <Modal>
+            <Button variant="outline">Toqi Tahmid | Developer</Button>
+            <Modal.Backdrop>
+              <Modal.Container placement="auto">
+                <Modal.Dialog className="sm:max-w-md">
+                  <Modal.Header>
+                    <Modal.Heading className="text-red-400 text-center">
+                      Only Developer Allowed
+                    </Modal.Heading>
+                  </Modal.Header>
+                  <Modal.Body className="p-6">
+                    <Surface variant="default">
+                      <form className="flex flex-col gap-4" onSubmit={onSubmit}>
+                        <TextField
+                          isRequired
+                          className="w-full"
+                          name="email"
+                          type="email"
+                          variant="secondary"
+                        >
+                          <Label>Email</Label>
+                          <Input
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </TextField>
+                        <TextField
+                          isRequired
+                          className="w-full"
+                          name="password"
+                          type="password"
+                          variant="secondary"
+                        >
+                          <Label>Password</Label>
+                          <Input
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                        </TextField>
+                        <Modal.Footer>
+                          <Button slot="close" variant="outline">
+                            Cancel
+                          </Button>
+                          <Button variant="secondary" type="submit">
+                            Done
+                          </Button>
+                        </Modal.Footer>
+                      </form>
+                    </Surface>
+                  </Modal.Body>
+                </Modal.Dialog>
+              </Modal.Container>
+            </Modal.Backdrop>
+          </Modal>
         </p>
 
         <div className="flex items-center gap-2">
