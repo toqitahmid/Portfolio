@@ -28,7 +28,7 @@ export async function POST (request){
       subject: `New message from ${name}`,
       html: `
         <h2>New Contact Form Message</h2>
-        <p><strong>নাম:</strong> ${name}</p>
+        <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong> ${message}</p>
             
