@@ -12,4 +12,9 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  baseURL: process.env.BETTER_AUTH_URL,
+  trustedOrigins: [
+    "https://toqi-portfolio.vercel.app",
+    "http://localhost:3000",
+  ],
 });
