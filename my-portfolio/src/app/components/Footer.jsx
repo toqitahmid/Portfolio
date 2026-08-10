@@ -19,15 +19,15 @@ const Footer = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (email !== "abusamsarafofficial@gmail.com") {
-      router.push("/");
-      return;
-    } else if (password !== "@TOQI-99@") {
-      router.push("/");
-      return;
-    }
-    const { data, error } = await authClient.signIn.email({
-      // name: 'Toqi Tahmid',
+    // if (email !== "abusamsarafofficial@gmail.com") {
+    //   router.push("/");
+    //   return;
+    // } else if (password !== "@TOQI-99@") {
+    //   router.push("/");
+    //   return;
+    // }
+    const { data, error } = await authClient.signUp.email({
+      name: 'Toqi Tahmid',
       email: email,
       password: password,
       rememberMe: true,
