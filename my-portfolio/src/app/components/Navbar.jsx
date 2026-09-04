@@ -14,6 +14,7 @@ export function Navbar() {
   const navItems = [
     { label: "Home", id: "home" },
     { label: "Projects", id: "projects" },
+    { label: "Skills", id: "skills" },
     { label: "Contact", id: "contact" },
   ];
 

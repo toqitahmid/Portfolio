@@ -65,15 +65,14 @@ const ProjectDetailsPage = async ({ params }) => {
           <div className="flex gap-2">
             {user && (
               <Link
-                href={`/projects/${project._id}/edit`}
+                href={`/ui/projects/${id}/edit`}
                 className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg border border-foreground/15 text-foreground/60 hover:border-foreground/40 hover:text-foreground transition-colors duration-200"
               >
                 <Pencil size={13} />
                 Edit
               </Link>
             )}
-
-            {/* <DeleteProjectButton id={project._id} /> */}
+          
           </div>
         </div>
 

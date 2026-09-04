@@ -46,7 +46,7 @@ const Footer = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
-      className="relative border-t border-border/20 px-3 sm:px-6 py-4 sm:py-5 backdrop-blur-xl overflow-hidden box-border pt-10 lg:w-8/12 md:w-10/12 sm:w-11/12 mx-auto z-40"
+      className="relative border-t border-border/20 px-3 sm:px-6 py-4 sm:py-5 backdrop-blur-xl overflow-hidden box-border pt-10 lg:w-8/12 md:w-11/12 sm:w-11/12 mx-auto z-40 rounded-3xl"
     >
       <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-between gap-3 sm:gap-4">
         <div>
