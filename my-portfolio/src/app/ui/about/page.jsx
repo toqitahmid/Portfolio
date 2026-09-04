@@ -53,10 +53,13 @@ const About = () => {
                 ))}
               </Button>
               <p className="text-xs sm:text-sm text-gray-400 mb-4 text-justify leading-5 sm:leading-6">
-                End-to-end web development with a focus on performance and user
-                experience. I specialise in building robust APIs, dynamic
-                front-ends, and reliable database architectures that scale with
-                your business.
+                Passionate Junior Web Developer with hands-on experience
+                building full-stack web applications using React, Next.js, and
+                Node.js. Eager to contribute to impactful products in a
+                collaborative team environment. Comfortable working with REST
+                APIs, modern JavaScript, and component-based UI architecture.
+                Actively seeking an internship or junior developer role to grow
+                professionally.
               </p>
             </div>
             <div className="flex gap-2 sm:gap-3 mt-4 flex-wrap">
@@ -65,7 +68,7 @@ const About = () => {
                   View Projects
                 </Button>
               </Link>
-              <Link href="/resume.pdf">
+              <Link href="https://drive.google.com/file/d/17jWGz5yjTjoiodrTBXdw93j82h5HPrI9/view?usp=drive_link">
                 <Button variant="outline" className="text-xs sm:text-sm">
                   <ArrowDownToSquare></ArrowDownToSquare>
                   Download Resume
