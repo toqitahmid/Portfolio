@@ -16,12 +16,12 @@ const About = () => {
   return (
     <motion.section
       id="about"
-      className="min-h-screen flex items-center lg:w-9/12 md:w-11/12 w-full mx-auto px-3 sm:px-6 overflow-x-hidden"
+      className="min-h-screen flex items-center   sm:px-6 overflow-x-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="backdrop-blur-xl w-full h-auto py-10 sm:py-16 relative backdrop-opacity-80 border rounded-2xl sm:rounded-3xl">
+      <div className="backdrop-blur-xl lg:w-8/12 md:w-11/12 w-11/12 mx-auto h-auto py-10 sm:py-16 relative backdrop-opacity-80 border rounded-2xl sm:rounded-3xl">
         <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 sm:gap-8 px-3 sm:px-6">
           <motion.div
             className="flex-1"

@@ -98,7 +98,7 @@ export function Navbar() {
   };
 
   return (
-    <div className="sticky top-0 z-50 w-full border-b border-separator backdrop-blur-md rounded-b-2xl">
+    <div className="sticky top-0 z-50 lg:w-8/12 md:w-11/12 w-11/12 mx-auto rounded-3xl m-2 border-b border-separator backdrop-blur-md">
       <NavStar />
 
       <header className="mx-auto flex h-16 w-full items-center justify-between px-3 sm:px-6 md:w-11/12 lg:w-9/12">

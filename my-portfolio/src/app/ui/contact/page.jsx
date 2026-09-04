@@ -55,7 +55,7 @@ const Contact = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
-      className="flex flex-col sm:flex-row items-center lg:w-8/12 md:w-full mx-auto min-h-screen justify-around backdrop-blur-sm border gap-5 px-6 sm:px-16 my-20"
+      className="flex flex-col sm:flex-row items-center lg:w-8/12 md:w-11/12 w-11/12 mx-auto rounded-3xl min-h-screen justify-around backdrop-blur-sm border gap-5 px-6 sm:px-16 my-20"
     >
       {/* ── Left side ── */}
       <div className="flex flex-col items-center sm:items-start space-y-4 sm:flex-1">

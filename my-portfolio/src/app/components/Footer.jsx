@@ -2,42 +2,16 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { useState } from "react";
 import { authClient } from "../lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ListChecks, LogOut } from "lucide-react";
 const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const {data:session} = authClient.useSession();
   const user = session?.user;
-  const router = useRouter();
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    if (email !== "araf@gmail.com") {
-      router.push("/");
-      return;
-    } else if (password !== "@ARAF-99@") {
-      router.push("/");
-      return;
-    }
-    const { data, error } = await authClient.signIn.email({
-      email: email,
-      password: password,
-      rememberMe: true,
-    });
-
-    if (data) {
-      router.push("/");
-    } else if (error) {
-      console.log(error);
-    }
-  };
   const socials = [
     {
       socialLink: "https://github.com/toqitahmid",
@@ -76,86 +50,14 @@ const Footer = () => {
     >
       <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-between gap-3 sm:gap-4">
         <div>
-          <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-start">
-            <Modal>
-              <Button variant="outline">Toqi Tahmid | Developer</Button>
-              <Modal.Backdrop>
-                <Modal.Container placement="auto">
-                  <Modal.Dialog className="sm:max-w-md">
-                    <Modal.Header>
-                      <Modal.Heading className="text-red-400 text-center">
-                        Only Developer Allowed
-                      </Modal.Heading>
-                    </Modal.Header>
-                    <Modal.Body className="p-6">
-                      <Surface variant="default">
-                        <form
-                          className="flex flex-col gap-4"
-                          onSubmit={onSubmit}
-                        >
-                          <TextField
-                            isRequired={true}
-                            className="w-full"
-                            name="email"
-                            type="email"
-                            variant="secondary"
-                          >
-                            <Label>Email</Label>
-                            <Input
-                              placeholder="Enter your email"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                            />
-                          </TextField>
-                          <TextField
-                            isRequired={true}
-                            className="w-full"
-                            name="password"
-                            type="password"
-                            variant="secondary"
-                          >
-                            <Label>Password</Label>
-                            <Input
-                              placeholder="Enter your password"
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
-                            />
-                          </TextField>
-                          <Modal.Footer>
-                            <Button slot="close" variant="outline">
-                              Cancel
-                            </Button>
-                            <Button variant="secondary" type="submit">
-                              Done
-                            </Button>
-                          </Modal.Footer>
-                        </form>
-                      </Surface>
-                    </Modal.Body>
-                  </Modal.Dialog>
-                </Modal.Container>
-              </Modal.Backdrop>
-            </Modal>
+          <p>
+            <Link
+              className="text-xs sm:text-sm text-muted-foreground text-center sm:text-start"
+              href={"/ui/devsite"}
+            >
+              Toqi Tahmid
+            </Link>
           </p>
-        </div>
-        <div>
-          {user && (
-            <div className="flex">
-              <button
-                className="text-sm font-semibold text-red-400 hover:text-red-500 transition-colors duration-200 cursor-pointer"
-                onClick={() => authClient.signOut()}
-              >
-                <LogOut></LogOut>
-              </button>
-              <Link
-                href="/ui/post"
-                className="text-sm font-semibold text-yellow-400 hover:text-yellow-600 transition-colors duration-200 cursor-pointer ml-3"
-              >
-                {" "}
-                <ListChecks />
-              </Link>
-            </div>
-          )}
         </div>
 
         <div className="flex items-center gap-2">
