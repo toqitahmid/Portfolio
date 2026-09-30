@@ -26,7 +26,7 @@ export default async function Projects() {
   return (
     <section
       id="projects"
-      className="py-10 sm:py-20 px-3 sm:px-4 min-h-screen overflow-x-hidden"
+      className="py-10 sm:py-30 px-3 sm:px-4 min-h-screen overflow-x-hidden"
     >
       <div className="lg:w-8/12 md:w-11/12 w-11/12 mx-auto">
         {/* ── Section heading ── */}
@@ -35,7 +35,7 @@ export default async function Projects() {
             Projects I&apos;ve Built
           </h2>
           <p className="text-xs sm:text-sm text-foreground/50 max-w-md mx-auto leading-relaxed px-2">
-            Full-stack products built with the MERN stack, Next.js
+            Full-stack products built with the MERN stack
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export default async function Projects() {
             No projects found.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 sm:mt-40 mt-20">
             {projects.map((project, i) => (
               <ProjectCard key={project._id} project={project} index={i} />
             ))}

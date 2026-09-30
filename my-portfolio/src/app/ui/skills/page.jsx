@@ -14,6 +14,9 @@ import {
   SiMongodb,
   SiVercel,
   SiRender,
+  SiGit,
+  SiGithub,
+  SiSocketdotio,
 } from "react-icons/si";
 import { FaShieldAlt } from "react-icons/fa";
 
@@ -78,7 +81,25 @@ const skills = [
     icon: SiRender,
     color: "text-[#46E3B7] border-[#46E3B7]/30",
   },
+  {
+    name: "Git",
+    icon: SiGit,
+    color: "text-[#F05032] border-[#F05032]/30",
+  },
+  {
+    name: "GitHub",
+    icon: SiGithub,
+    color: "text-slate-900 dark:text-white border-slate-300 dark:border-white/30",
+  },
+  {
+    name: "Socket.io",
+    icon: SiSocketdotio,
+    color: "text-slate-900 dark:text-white border-slate-300 dark:border-white/30",
+  },
 ];
+
+const row1 = skills.slice(0, 8);
+const row2 = skills.slice(8, 16);
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -123,31 +144,47 @@ export default function Skills() {
         </motion.p>
       </div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
-      >
-        {skills.map((skill, index) => {
-          const Icon = skill.icon;
-          return (
-            <motion.div
-              key={`${skill.name}-${index}`}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`group flex flex-col items-center justify-center p-6 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 backdrop-blur-sm shadow-sm dark:shadow-md transition-all duration-300 ${skill.color}`}
-            >
-              <Icon className="w-10 h-10 mb-3 transition-all duration-300 group-hover:grayscale group-hover:opacity-50" />
-              <span className="text-sm font-medium text-slate-800 dark:text-slate-200 transition-colors duration-300 group-hover:text-slate-500 dark:group-hover:text-slate-400">
-                {skill.name}
-              </span>
-            </motion.div>
-          );
-        })}
-      </motion.div>
+      <div className="relative flex flex-col gap-8 overflow-hidden w-full max-w-full sm:mt-40 mt-20">
+        {/* Row 1 - Left to Right */}
+        <div className="flex w-max animate-marquee gap-4 sm:gap-6 hover:[animation-play-state:paused]">
+          {[...row1, ...row1].map((skill, index) => {
+            const Icon = skill.icon;
+            return (
+              <div
+                key={`row1-${skill.name}-${index}`}
+                className={`group flex flex-col items-center justify-center w-32 h-32 sm:w-40 sm:h-40 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 backdrop-blur-sm shadow-sm dark:shadow-md transition-all duration-300 hover:scale-105 ${skill.color}`}
+              >
+                <Icon className="w-10 h-10 mb-3 transition-all duration-300 group-hover:grayscale group-hover:opacity-50" />
+                <span className="text-sm font-medium text-slate-800 dark:text-slate-200 transition-colors duration-300 group-hover:text-slate-500 dark:group-hover:text-slate-400 text-center">
+                  {skill.name}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Row 2 - Right to Left */}
+        <div className="flex w-max animate-marquee-reverse gap-4 sm:gap-6 hover:[animation-play-state:paused]">
+          {[...row2, ...row2].map((skill, index) => {
+            const Icon = skill.icon;
+            return (
+              <div
+                key={`row2-${skill.name}-${index}`}
+                className={`group flex flex-col items-center justify-center w-32 h-32 sm:w-40 sm:h-40 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 backdrop-blur-sm shadow-sm dark:shadow-md transition-all duration-300 hover:scale-105 ${skill.color}`}
+              >
+                <Icon className="w-10 h-10 mb-3 transition-all duration-300 group-hover:grayscale group-hover:opacity-50" />
+                <span className="text-sm font-medium text-slate-800 dark:text-slate-200 transition-colors duration-300 group-hover:text-slate-500 dark:group-hover:text-slate-400 text-center">
+                  {skill.name}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        
+        {/* Gradient overlays for smooth fading edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-background to-transparent dark:from-background"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-background to-transparent dark:from-background"></div>
+      </div>
     </section>
   );
 }
