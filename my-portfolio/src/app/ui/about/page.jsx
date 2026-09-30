@@ -5,6 +5,8 @@ import devToqi from "../../../assets/toqi.png";
 import { Button, Chip } from "@heroui/react";
 import { CircleCheckFill, ArrowDownToSquare } from "@gravity-ui/icons";
 import Link from "next/link";
+import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 const About = () => {
   const skills = [
     { name: "React" },
@@ -12,6 +14,34 @@ const About = () => {
     { name: "| Node.js" },
     { name: "| Express" },
     { name: "| MongoDB" },
+  ];
+
+  const socials = [
+    {
+      socialLink: "https://github.com/toqitahmid",
+      label: "GitHub",
+      icon: <FaGithub></FaGithub>,
+    },
+    {
+      socialLink: "https://www.linkedin.com/in/toqi6t9/",
+      label: "LinkedIn",
+      icon: <FaLinkedin></FaLinkedin>,
+    },
+    {
+      socialLink: "https://x.com/toqitah_mid",
+      label: "Twitter / X",
+      icon: <FaXTwitter></FaXTwitter>,
+    },
+    {
+      socialLink: "https://www.facebook.com/mad.tahmid.6T9/",
+      label: "Facebook",
+      icon: <FaFacebook></FaFacebook>,
+    },
+    {
+      socialLink: "https://www.instagram.com/mad_toqi/",
+      label: "Instagram",
+      icon: <FaInstagram></FaInstagram>,
+    },
   ];
   return (
     <motion.section
@@ -30,17 +60,17 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Chip color="success" className="text-xs sm:text-sm">
+            <Chip color="success" className="text-sm sm:text-base">
               <CircleCheckFill />
               <Chip.Label>Open to opportunities</Chip.Label>
             </Chip>
             <div className="mt-4 sm:mt-6">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                 Full-Stack MERN Developer
               </h1>
               <Button
                 variant="secondary"
-                className="flex flex-wrap gap-1 sm:gap-2 mb-4 cursor-default text-xs sm:text-sm"
+                className="flex flex-wrap gap-1 sm:gap-2 mb-4 cursor-default text-sm sm:text-base"
               >
                 {skills.map((skill, index) => (
                   <div
@@ -52,7 +82,7 @@ const About = () => {
                   </div>
                 ))}
               </Button>
-              <p className="text-xs sm:text-sm text-gray-400 mb-4 text-justify leading-5 sm:leading-6">
+              <p className="text-sm sm:text-base text-gray-400 mb-4 text-justify leading-6 sm:leading-7">
                 Passionate Junior Web Developer with hands-on experience
                 building full-stack web applications using React, Next.js, and
                 Node.js. Eager to contribute to impactful products in a
@@ -64,16 +94,31 @@ const About = () => {
             </div>
             <div className="flex gap-2 sm:gap-3 mt-4 flex-wrap">
               <Link href="/ui/projects">
-                <Button variant="secondary" className="text-xs sm:text-sm">
+                <Button variant="secondary" className="text-sm sm:text-base">
                   View Projects
                 </Button>
               </Link>
               <Link href="https://drive.google.com/file/d/17jWGz5yjTjoiodrTBXdw93j82h5HPrI9/view?usp=drive_link">
-                <Button variant="outline" className="text-xs sm:text-sm">
+                <Button variant="outline" className="text-sm sm:text-base">
                   <ArrowDownToSquare></ArrowDownToSquare>
                   Download Resume
                 </Button>
               </Link>
+            </div>
+            
+            <div className="flex items-center gap-3 mt-6 sm:mt-8">
+              {socials.map(({ socialLink, label, icon }) => (
+                <a
+                  key={label}
+                  href={socialLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-border/20 text-muted-foreground transition-all hover:bg-secondary hover:text-foreground hover:scale-110 shadow-sm text-xl sm:text-2xl"
+                >
+                  {icon}
+                </a>
+              ))}
             </div>
           </motion.div>
 
@@ -88,7 +133,7 @@ const About = () => {
               src={devToqi}
               alt="Toqi Tahmid"
               className="rounded-2xl sm:rounded-3xl lg:w-[20vw] lg:h-[60vh] md:w-[30vw] w-[55vw] max-w-xs sm:max-w-none border object-cover"
-              loading="eager"
+              priority={true}
             />
           </motion.div>
         </div>

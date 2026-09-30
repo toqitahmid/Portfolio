@@ -1,9 +1,12 @@
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import About from "../about/page";
-import Contact from "../contact/page";
 import Projects from "../projects/page";
 import { Navbar } from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import Skills from "../skills/page";
+
+const Skills = dynamic(() => import("../skills/page"), { ssr: true });
+const Contact = dynamic(() => import("../contact/page"), { ssr: true });
 
 const HomePage = () => {
   return (
@@ -14,7 +17,9 @@ const HomePage = () => {
       </section>
 
       <section id="projects" className="min-h-screen">
-        <Projects />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-gray-500">Loading Projects...</div>}>
+          <Projects />
+        </Suspense>
       </section>
       
       <section id="skills" className="min-h-screen">

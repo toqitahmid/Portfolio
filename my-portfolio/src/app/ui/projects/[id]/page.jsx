@@ -1,8 +1,10 @@
 import { getServerSession } from "@/app/lib/get-session";
-import { ArrowUpRight, Pencil } from "lucide-react";
+import { ArrowUpRight, Pencil, CheckCircle, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { DiGithub } from "react-icons/di";
+import { Navbar } from "@/app/components/Navbar";
+import Footer from "@/app/components/Footer";
 
 async function getProject(id) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -24,26 +26,28 @@ async function getProject(id) {
 const ProjectDetailsPage = async ({ params }) => {
   const { id } = await params;
   console.log(id);
-   const project = await getProject(id);
+  const project = await getProject(id);
 
-   const session = await getServerSession();
-   const user = session?.user;
+  const session = await getServerSession();
+  const user = session?.user;
 
-   if (!project) {
-     return (
-       <section className="min-h-screen flex items-center justify-center px-4">
-         <div className="text-center">
-           <h1 className="text-xl font-bold mb-2">Project not found</h1>
-           <Link href="/" className="text-sm text-amber-500 hover:underline">
-             Back to projects
-           </Link>
-         </div>
-       </section>
-     );
-   }
+  if (!project) {
+    return (
+      <section className="min-h-screen flex items-center justify-center px-4">
+        <div className="text-center">
+          <h1 className="text-xl font-bold mb-2">Project not found</h1>
+          <Link href="/" className="text-sm text-amber-500 hover:underline">
+            Back to projects
+          </Link>
+        </div>
+      </section>
+    );
+  }
   return (
-    <section className="py-10 sm:py-16 px-3 sm:px-4 min-h-screen">
-      <div className="max-w-4xl mx-auto w-full">
+    <>
+      <Navbar />
+      <section className="pt-12 sm:pt-20 pb-32 sm:pb-40 px-6 sm:px-10 lg:px-12 min-h-screen mt-5">
+      <div className="max-w-4xl mx-auto w-full mb-16 sm:mb-24">
         {/* ── Cover image ── */}
         <div className="relative h-48 sm:h-72 md:h-96 w-full rounded-xl sm:rounded-2xl overflow-hidden bg-foreground/5 mb-6 sm:mb-8">
           <Image
@@ -72,7 +76,7 @@ const ProjectDetailsPage = async ({ params }) => {
                 Edit
               </Link>
             )}
-          
+
           </div>
         </div>
 
@@ -101,32 +105,34 @@ const ProjectDetailsPage = async ({ params }) => {
         {/* ── Features + Challenges side by side ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-10">
           <div>
-            <h2 className="text-xs sm:text-sm font-semibold text-foreground/70 mb-2 sm:mb-3">
+            <h2 className="text-base sm:text-lg font-bold text-foreground/80 mb-3 sm:mb-4">
               Features
             </h2>
-            <ul className="space-y-1.5 sm:space-y-2">
+            <ul className="space-y-3 sm:space-y-4">
               {project.features.map((feature, i) => (
                 <li
                   key={i}
-                  className="text-xs sm:text-sm text-foreground/55 leading-relaxed pl-3 border-l-2 border-amber-500/30"
+                  className="flex items-start gap-2.5 text-sm sm:text-base font-bold text-foreground/75 leading-relaxed"
                 >
-                  {feature}
+                  <CheckCircle className="text-amber-500 shrink-0 mt-0.5" size={18} />
+                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h2 className="text-xs sm:text-sm font-semibold text-foreground/70 mb-2 sm:mb-3">
+            <h2 className="text-base sm:text-lg font-bold text-foreground/80 mb-3 sm:mb-4">
               Challenges
             </h2>
-            <ul className="space-y-1.5 sm:space-y-2">
+            <ul className="space-y-3 sm:space-y-4">
               {project.challenges.map((challenge, i) => (
                 <li
                   key={i}
-                  className="text-xs sm:text-sm text-foreground/55 leading-relaxed pl-3 border-l-2 border-foreground/15"
+                  className="flex items-start gap-2.5 text-sm sm:text-base font-bold text-foreground/75 leading-relaxed"
                 >
-                  {challenge}
+                  <AlertCircle className="text-red-400 shrink-0 mt-0.5" size={18} />
+                  <span>{challenge}</span>
                 </li>
               ))}
             </ul>
@@ -157,6 +163,7 @@ const ProjectDetailsPage = async ({ params }) => {
         </div>
       </div>
     </section>
+  </>
   );
 };
 
