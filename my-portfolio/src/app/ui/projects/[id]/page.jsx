@@ -47,9 +47,9 @@ const ProjectDetailsPage = async ({ params }) => {
     <>
       <Navbar />
       <section className="pt-12 sm:pt-20 pb-32 sm:pb-40 px-6 sm:px-10 lg:px-12 min-h-screen mt-5">
-      <div className="max-w-4xl mx-auto w-full mb-16 sm:mb-24">
+      <div className="max-w-7xl mx-auto w-full mb-16 sm:mb-24">
         {/* ── Cover image ── */}
-        <div className="relative h-48 sm:h-72 md:h-96 w-full rounded-xl sm:rounded-2xl overflow-hidden bg-foreground/5 mb-6 sm:mb-8">
+        <div className="relative h-48 sm:h-82 md:h-160 w-full rounded-xl sm:rounded-2xl overflow-hidden bg-foreground/5 mb-6 sm:mb-8">
           <Image
             src={project.imageUrl}
             alt={project.title}
@@ -112,7 +112,7 @@ const ProjectDetailsPage = async ({ params }) => {
               {project.features.map((feature, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-2.5 text-sm sm:text-base font-bold text-foreground/75 leading-relaxed"
+                  className="flex items-start gap-2.5 text-2xl font-semibold sm:text-base text-foreground/75 leading-relaxed text-justify"
                 >
                   <CheckCircle className="text-amber-500 shrink-0 mt-0.5" size={18} />
                   <span>{feature}</span>
@@ -129,7 +129,7 @@ const ProjectDetailsPage = async ({ params }) => {
               {project.challenges.map((challenge, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-2.5 text-sm sm:text-base font-bold text-foreground/75 leading-relaxed"
+                  className="flex items-start gap-2.5 text-sm sm:text-base text-foreground/75 leading-relaxed text-justify font-medium"
                 >
                   <AlertCircle className="text-red-400 shrink-0 mt-0.5" size={18} />
                   <span>{challenge}</span>
