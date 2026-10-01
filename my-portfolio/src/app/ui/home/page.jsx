@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import About from "../about/page";
 import Projects from "../projects/page";
+import ProjectGridSkeleton from "../projects/ProjectGridSkeleton";
 import { Navbar } from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 
@@ -17,7 +18,7 @@ const HomePage = () => {
       </section>
 
       <section id="projects" className="min-h-screen">
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-gray-500">Loading Projects...</div>}>
+        <Suspense fallback={<ProjectGridSkeleton count={2} />}>
           <Projects />
         </Suspense>
       </section>

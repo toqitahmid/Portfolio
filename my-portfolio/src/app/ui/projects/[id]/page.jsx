@@ -1,5 +1,5 @@
 import { getServerSession } from "@/app/lib/get-session";
-import { ArrowUpRight, Pencil, CheckCircle, AlertCircle } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Pencil, CheckCircle, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { DiGithub } from "react-icons/di";
@@ -37,7 +37,7 @@ const ProjectDetailsPage = async ({ params }) => {
         <div className="text-center">
           <h1 className="text-xl font-bold mb-2">Project not found</h1>
           <Link href="/" className="text-sm text-amber-500 hover:underline">
-            Back to projects
+            Back to Home
           </Link>
         </div>
       </section>
@@ -48,6 +48,20 @@ const ProjectDetailsPage = async ({ params }) => {
       <Navbar />
       <section className="pt-12 sm:pt-20 pb-32 sm:pb-40 px-6 sm:px-10 lg:px-12 min-h-screen mt-5">
       <div className="max-w-7xl mx-auto w-full mb-16 sm:mb-24">
+        {/* ── Back to Home navigation ── */}
+        <div className="mb-4 sm:mb-6">
+          <Link
+            href="/"
+            className="group inline-flex items-center gap-2 text-xs sm:text-sm font-medium px-3.5 py-2 rounded-xl border border-foreground/10 bg-foreground/[0.03] hover:bg-foreground/[0.08] hover:border-amber-500/40 text-foreground/70 hover:text-foreground transition-all duration-200 backdrop-blur-sm"
+          >
+            <ArrowLeft
+              size={15}
+              className="text-amber-500 transition-transform duration-200 group-hover:-translate-x-1"
+            />
+            <span>Back to Home</span>
+          </Link>
+        </div>
+
         {/* ── Cover image ── */}
         <div className="relative h-48 sm:h-82 md:h-160 w-full rounded-xl sm:rounded-2xl overflow-hidden bg-foreground/5 mb-6 sm:mb-8">
           <Image
@@ -140,7 +154,15 @@ const ProjectDetailsPage = async ({ params }) => {
         </div>
 
         {/* ── Links ── */}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href="/"
+            className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium px-4 py-2 sm:py-2.5 rounded-lg border border-foreground/15 text-foreground/70 hover:border-amber-500/40 hover:text-foreground transition-all duration-200"
+          >
+            <ArrowLeft size={15} className="text-amber-500 transition-transform duration-200 group-hover:-translate-x-1" />
+            Back to Home
+          </Link>
+
           <Link
             href={project.githubUrl}
             target="_blank"
