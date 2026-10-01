@@ -5,7 +5,9 @@ async function getProjects() {
 
   try {
     const res = await fetch(`${apiUrl}/api/projects`, {
-      cache: "no-store",
+      next: {
+        revalidate:10
+      },
     });
 
     if (!res.ok) {
